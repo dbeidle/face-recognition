@@ -46,7 +46,7 @@ class App extends Component {
     isSignedIn: false,
     user: {
       id: "",
-      Name: "",
+      name: "",
       email: "",
       entries: 0,
       joined: "",
@@ -60,10 +60,26 @@ class App extends Component {
   onButtonSubmit = () => {
     face.models
       .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
-      .then((response) =>
-        this.displayFaceBoundary(this.calculateFaceLocation(response))
-      )
-      .catch((err) => console.log("Shit's done hit the fan", err));
+      .then((response) => {
+        if (response) {
+          let faces = response.outputs[0].data.regions;
+          let faceCount = faces.length;
+          fetch("http://localhost:3001/image", {
+            method: "put",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id: this.state.user.id,
+              faceCount: faceCount,
+            }),
+          })
+            .then((response) => response.json())
+            .then((count) => {
+              this.setState(Object.assign(this.state.user, { entries: count }));
+            });
+        }
+        this.displayFaceBoundary(this.calculateFaceLocation(response));
+      })
+      .catch((err) => console.log(err));
   };
 
   calculateFaceLocation = (data) => {
@@ -109,7 +125,7 @@ class App extends Component {
     this.setState({
       user: {
         id: data.id,
-        Name: data.name,
+        name: data.name,
         email: data.email,
         entries: data.entries,
         joined: data.joined,

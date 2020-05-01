@@ -12,15 +12,15 @@ const database = {
   users: [
     {
       id: "id01",
-      Name: "Dave",
+      name: "Dave",
       email: "whosit@noneya.com",
       password: "asdf",
-      entries: 2,
+      entries: 0,
       joined: new Date(),
     },
     {
       id: "id02",
-      Name: "Bailey",
+      name: "Bailey",
       email: "ruff@noneya.com",
       password: "asdf",
       entries: 0,
@@ -49,7 +49,6 @@ app.post("/signin", (req, resp) => {
 app.post("/signup", (req, resp) => {
   const { email, name, password } = req.body;
   const hash = bcrypt.hashSync(password, 10);
-  console.log("bcrypt hash", hash);
   database.users.push({
     id: "id03",
     Name: name,
@@ -77,12 +76,12 @@ app.get("/profile/:id", (req, resp) => {
 });
 
 app.put("/image", (req, resp) => {
-  const { id } = req.body;
+  const { id, faceCount } = req.body;
   let found = false;
   database.users.forEach((user) => {
     if (user.id === id) {
       found = true;
-      user.entries++;
+      user.entries = user.entries + faceCount;
       return resp.json(user.entries);
     }
   });

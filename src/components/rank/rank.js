@@ -4,12 +4,8 @@ import React from "react";
 const Rank = ({ name, entries }) => {
   return (
     <div>
-      <div>
-        <h1 className="white f3">{name}, You're rank is ...</h1>
-      </div>
-      <div>
-        <h2 className="white f1"> # {entries} </h2>
-      </div>
+      <div className="white f3">{`${name}, Total faces counted is...`}</div>
+      <div className="white f1"># {entries}</div>
     </div>
   );
 };
