@@ -16,7 +16,7 @@ class SignUp extends Component {
   };
 
   passwordHandler = (event) => {
-    this.setState({ Password: event.target.value });
+    this.setState({ password: event.target.value });
   };
 
   onSubmitHandler = () => {
@@ -31,7 +31,7 @@ class SignUp extends Component {
     })
       .then((response) => response.json())
       .then((user) => {
-        if (user) {
+        if (user.id) {
           this.props.loadUser(user);
           this.props.onRouteChange("home");
         }
