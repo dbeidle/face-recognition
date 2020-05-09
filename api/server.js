@@ -25,7 +25,7 @@ app.use(cors());
 
 app.get("/", (req, resp) => {
   //const date = Date.now();
-  console.log("hit");
+  resp.status(200).json("Hi There");
 });
 
 app.post("/signin", signin.signinHandler(db, bcrypt));
@@ -39,7 +39,7 @@ app.post("/imageurl", (req, resp) => {
   image.handleApiCall(req, resp);
 });
 
-const port = 3001;
+const port = 5657;
 app.listen(port, () => {
   console.log(`API server started. Listening on port ${port}`);
 });

@@ -20,7 +20,7 @@ class SignUp extends Component {
   };
 
   onSubmitHandler = () => {
-    fetch("http://localhost:3001/signup", {
+    fetch("https://faces.drivelikeyastoleit.com:5657/signup", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({

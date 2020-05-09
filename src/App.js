@@ -61,7 +61,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    fetch("http://localhost:3001/imageurl", {
+    fetch("https://faces.drivelikeyastoleit.com:5657/imageurl", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -73,7 +73,7 @@ class App extends Component {
         if (response) {
           let faces = response.outputs[0].data.regions;
           let faceCount = faces.length;
-          fetch("http://localhost:3001/image", {
+          fetch("https://faces.drivelikeyastoleit.com:5657/image", {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
