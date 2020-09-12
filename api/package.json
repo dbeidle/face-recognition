@@ -10,7 +10,7 @@
     "nodemon": "^2.0.3"
   },
   "dependencies": {
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "clarifai": "^2.9.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
